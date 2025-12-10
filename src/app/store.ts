@@ -7,8 +7,9 @@ import {
 
 import { dataApi } from "../features/data/data-api";
 import { dialogSlice } from "../features/dialog/dialog-slice";
+import { filterSlice } from "../features/Filter/filter-slice";
 
-const rootReducer = combineSlices(dataApi, dialogSlice);
+const rootReducer = combineSlices(dataApi, dialogSlice, filterSlice);
 
 export const store = configureStore({
   reducer: rootReducer,

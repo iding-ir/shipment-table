@@ -1,8 +1,9 @@
 .app {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
     "header"
+    "filter"
     "main"
     "footer";
   gap: 1rem;
@@ -21,41 +22,9 @@
   main {
     grid-area: main;
     overflow: auto;
-    padding: 1rem;
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 80rem;
-      margin: 0 auto;
-
-      thead {
-        th {
-          color: #fefefe;
-          background-color: #033a61;
-        }
-      }
-
-      tbody {
-        tr {
-          background-color: #e0e6ed;
-        }
-
-        tr:nth-child(even) {
-          background-color: #fefefe;
-        }
-      }
-
-      th,
-      td {
-        padding: 0.5rem;
-        text-align: start;
-      }
-
-      th {
-        color: #cbd5e1;
-      }
-    }
+    width: 80%;
+    max-width: 80rem;
+    margin: 0 auto;
   }
 
   footer {
