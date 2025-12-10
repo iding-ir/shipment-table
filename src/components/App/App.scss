@@ -1,8 +1,76 @@
 .app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  gap: 1rem;
+  height: 100%;
+  background-color: #fefefe;
+
+  header {
+    grid-area: header;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 1rem;
+    color: #fefefe;
+    background-color: #033a61;
+  }
+
+  main {
+    grid-area: main;
+    overflow: auto;
+    padding: 1rem;
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 80rem;
+      margin: 0 auto;
+
+      thead {
+        th {
+          color: #fefefe;
+          background-color: #033a61;
+        }
+      }
+
+      tbody {
+        tr {
+          background-color: #e0e6ed;
+        }
+
+        tr:nth-child(even) {
+          background-color: #fefefe;
+        }
+      }
+
+      th,
+      td {
+        padding: 0.5rem;
+        text-align: start;
+      }
+
+      th {
+        color: #cbd5e1;
+      }
+    }
+  }
+
+  footer {
+    grid-area: footer;
+    font-size: 0.875rem;
+    padding: 1rem;
+    background-color: #9eb5c6;
+  }
+}
+
+.centered {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: orange;
+  font-size: 1.5rem;
 }
