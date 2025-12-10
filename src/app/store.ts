@@ -8,13 +8,14 @@ import {
 import { dataApi } from "../features/data/data-api";
 import { dialogSlice } from "../features/dialog/dialog-slice";
 import { filterSlice } from "../features/Filter/filter-slice";
+import { updateApi } from "../features/data/update-api";
 
-const rootReducer = combineSlices(dataApi, dialogSlice, filterSlice);
+const rootReducer = combineSlices(dataApi, updateApi, dialogSlice, filterSlice);
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(dataApi.middleware),
+    getDefaultMiddleware().concat(dataApi.middleware, updateApi.middleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -34,3 +34,24 @@ export const fetchShipments = async (): Promise<Shipment[]> => {
 
   return shipments;
 };
+
+export type UpdateShipmentData = Pick<Shipment, "status" | "destination">;
+
+export async function updateShipment(
+  shipmentId: string,
+  data: UpdateShipmentData
+): Promise<UpdateShipmentData> {
+  await randomDelay(1000, 2000);
+
+  const succeed = Math.random() < 0.8;
+
+  if (!succeed) {
+    return Promise.reject(
+      new Error("Network error: failed to update shipment")
+    );
+  }
+
+  console.log(`Shipment ${shipmentId} updated with data:`, data);
+
+  return data;
+}
