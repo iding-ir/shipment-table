@@ -23,13 +23,15 @@ export const Dialog: React.FC = () => {
     if (!shipment) {
       return;
     }
-
-    await updateShipment({
-      shipmentId: shipment.id,
-      data: { status, destination },
-    }).unwrap();
-
-    dispatch(closeDialog());
+    try {
+      await updateShipment({
+        shipmentId: shipment.id,
+        data: { status, destination },
+      }).unwrap();
+      dispatch(closeDialog());
+    } catch (err) {
+      console.error("updateShipment failed:", err);
+    }
   };
 
   const handleCancel = () => {
@@ -52,6 +54,7 @@ export const Dialog: React.FC = () => {
               value={status}
               onChange={(e) => setStatus(e.target.value as ShipmentStatus)}
               disabled={isLoading}
+              data-testid="status-select"
             >
               {SHIPMENT_STATUSES.map((statusOption) => (
                 <option key={statusOption} value={statusOption}>
@@ -68,10 +71,15 @@ export const Dialog: React.FC = () => {
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               disabled={isLoading}
+              data-testid="destination-input"
             />
           </label>
 
-          {isError && <p className="error">Failed to save changes.</p>}
+          {isError && (
+            <p className="error" data-testid="error-message">
+              Failed to save changes.
+            </p>
+          )}
 
           <div className="actions">
             <button
@@ -79,6 +87,7 @@ export const Dialog: React.FC = () => {
               type="button"
               onClick={handleCancel}
               disabled={isLoading}
+              data-testid="cancel-button"
             >
               Cancel
             </button>
@@ -87,6 +96,7 @@ export const Dialog: React.FC = () => {
               type="button"
               onClick={handleSave}
               disabled={isLoading}
+              data-testid="save-button"
             >
               {isLoading ? "Saving..." : "Save Changes"}
             </button>
