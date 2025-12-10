@@ -29,3 +29,11 @@ table {
     color: #cbd5e1;
   }
 }
+
+.clickable {
+  cursor: pointer;
+
+  span {
+    text-decoration: underline;
+  }
+}
