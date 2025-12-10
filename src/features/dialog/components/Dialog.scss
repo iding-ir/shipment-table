@@ -44,6 +44,10 @@
         color: #ff4d4f;
       }
 
+      .loading {
+        color: #686868;
+      }
+
       .actions {
         display: flex;
         justify-content: flex-end;
@@ -54,6 +58,11 @@
           border: none;
           border-radius: 0.5rem;
           cursor: pointer;
+
+          &:disabled {
+            opacity: 0.8;
+            cursor: not-allowed;
+          }
 
           &.save {
             background-color: #007bff;

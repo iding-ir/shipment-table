@@ -81,6 +81,12 @@ export const Dialog: React.FC = () => {
             </p>
           )}
 
+          {isLoading && (
+            <p className="loading" data-testid="loading-message">
+              Saving changes...
+            </p>
+          )}
+
           <div className="actions">
             <button
               className="cancel"

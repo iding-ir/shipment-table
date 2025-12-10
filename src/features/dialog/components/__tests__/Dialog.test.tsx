@@ -167,4 +167,50 @@ describe("Dialog component", () => {
       });
     });
   });
+
+  it("should show the loading message when the save is in progress", async () => {
+    store.dispatch(
+      openDialog({
+        id: "SHP-001",
+        status: "Booked",
+        origin: "Port of Shanghai",
+        destination: "Port of Hamburg",
+        estimatedArrival: new Date().toISOString(),
+      })
+    );
+    (updateShipment as vi.Mock).mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve({
+                status: "Delivered",
+                destination: "Port of Rotterdam",
+              }),
+            1000
+          )
+        )
+    );
+
+    render(
+      <Provider store={store}>
+        <Dialog />
+      </Provider>
+    );
+
+    const saveButton = screen.getByTestId("save-button");
+
+    fireEvent.click(saveButton);
+
+    expect(saveButton).toHaveTextContent("Saving...");
+
+    await waitFor(() => {
+      const loadingMessage = screen.getByTestId("loading-message");
+      expect(loadingMessage).toBeInTheDocument();
+      expect(updateShipment).toHaveBeenCalledWith("SHP-001", {
+        status: "Booked",
+        destination: "Port of Hamburg",
+      });
+    });
+  });
 });
